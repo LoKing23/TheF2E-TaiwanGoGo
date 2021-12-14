@@ -1,19 +1,13 @@
-# vue-cli
+# 台灣走走
+作品連結：https://loking23.github.io/TheF2E-TaiwanGoGo/
 
-## Project setup
-```
-npm install
-```
+The-F2E第一關主題
+- design: Breakfast
+- code: LoKing
+- API: 交通部TDX API
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+感謝六角學院舉辦TheF2E活動 <br>
+感謝設計師們提供的美美設計稿
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+

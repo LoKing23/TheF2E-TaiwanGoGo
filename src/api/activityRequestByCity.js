@@ -31,11 +31,12 @@ const allCity = [
 export const getRandomActivityByCity = () => {
   const randomIndex = Math.floor(Math.random() * allCity.length);
   const city = allCity[randomIndex];
-  const randomSpot = randomIndex + 1;
+  const randomSpot = Math.floor(Math.random() * 10) + 1;
   return activityRequest.get(
     `${city}?
       $select=ActivityName,StartTime,EndTime,City,Picture&
-      $top=1&
+      $top=${randomSpot}&
+      $skip=${randomSpot - 1}&
       $format=JSON`,
   );
 };

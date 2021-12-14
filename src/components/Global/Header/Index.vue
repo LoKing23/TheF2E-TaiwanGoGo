@@ -44,13 +44,13 @@
     }
   }
   header.active {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     backdrop-filter: blur(4px);
-    z-index: 1;
+    z-index: 20000;
     background-color: rgba(0, 0, 0, 0.1);
     .container {
       width: 276px;
