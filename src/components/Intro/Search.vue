@@ -1,0 +1,57 @@
+<script>
+  export default {};
+</script>
+<template>
+  <div class="input-group">
+    <select name="" id="">
+      <option value="探索景點">探索景點</option>
+      <option value="探索景點">節慶活動</option>
+      <option value="探索景點">品嚐美食</option>
+    </select>
+    <input type="text" placeholder="你想去哪裡？請輸入關鍵字" />
+    <a href="javascript:;" class="search">
+      <img src="@/assets/Icon/search30.svg" alt="" />
+      <span>搜尋</span>
+    </a>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+  .input-group {
+    width: 345px;
+    > :not(:first-child) {
+      margin-top: 8px;
+    }
+    > * {
+      width: 100%;
+      padding: 12px 30px;
+      border-radius: 6px;
+    }
+    display: flex;
+    flex-direction: column;
+    select,
+    input {
+      border: 1px solid #e6e6e6;
+    }
+    input {
+      background: #f9f9f9;
+      &::placeholder {
+        color: #9e9e9e;
+      }
+    }
+    @media (min-width: 1200px) {
+      width: 350px;
+    }
+    .search {
+      color: #fff;
+      font-weight: bold;
+      background-color: #7f977b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        margin-right: 8px;
+      }
+    }
+  }
+</style>

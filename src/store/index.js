@@ -1,12 +1,11 @@
-import { createStore } from 'vuex'
-
+import { createStore } from "vuex";
+import ScientSpot from "./Home/scientSpot";
+import Restaurant from "./Home/restaurant";
+import Activity from "./Home/activity";
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-  }
-})
+    Restaurant,
+    ScientSpot,
+    Activity,
+  },
+});
