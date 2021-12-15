@@ -11,8 +11,6 @@
       },
     },
     setup(props) {
-      // console.log("QQ:", props.isOpen);
-      // console.log("乜噗:", props.HandIsOpen);
       return {
         props,
       };
@@ -27,13 +25,13 @@
   <nav :class="{ active: props.isOpen }">
     <ul class="list">
       <li class="list-item">
-        <router-link to="/"> 探索景點 </router-link>
+        <router-link to="/scientSpot"> 探索景點 </router-link>
       </li>
       <li class="list-item">
-        <router-link to="/"> 節慶活動 </router-link>
+        <router-link to="/activity"> 節慶活動 </router-link>
       </li>
       <li class="list-item">
-        <router-link to="/"> 品嚐美食 </router-link>
+        <router-link to="/restaurant"> 品嚐美食 </router-link>
       </li>
     </ul>
   </nav>

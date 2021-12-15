@@ -19,6 +19,8 @@
 <style lang="scss" scoped>
   .input-group {
     width: 345px;
+    display: flex;
+    flex-direction: column;
     > :not(:first-child) {
       margin-top: 8px;
     }
@@ -27,8 +29,6 @@
       padding: 12px 30px;
       border-radius: 6px;
     }
-    display: flex;
-    flex-direction: column;
     select,
     input {
       border: 1px solid #e6e6e6;
@@ -51,6 +51,9 @@
       align-items: center;
       img {
         margin-right: 8px;
+      }
+      &:hover {
+        background-color: #65895f;
       }
     }
   }
