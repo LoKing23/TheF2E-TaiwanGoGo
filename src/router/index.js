@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Activity from "../views/Activity.vue";
 import Restaurant from "../views/Restaurant.vue";
 import ScientSpot from "../views/ScientSpot.vue";
+import Lv3 from "@/components/Lv3/_lv3.vue";
 import NotFound from "@/components/NotFound";
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/scientSpot",
     name: "scientSpot",
     component: ScientSpot,
+  },
+  {
+    path: "/:lv2/:lv3",
+    name: "lv3",
+    component: Lv3,
   },
   {
     path: "/:catchAll(.*)",

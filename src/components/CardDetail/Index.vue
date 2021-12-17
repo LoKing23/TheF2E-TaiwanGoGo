@@ -1,5 +1,5 @@
 <script>
-  import { computed, reactive, ref, watch } from "@vue/runtime-core";
+  import { computed } from "@vue/runtime-core";
   export default {
     props: {
       data: {

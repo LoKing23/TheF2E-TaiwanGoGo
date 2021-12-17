@@ -2,7 +2,7 @@
   import { useStore } from "vuex";
   import { ref, reactive, onMounted, watch, computed } from "vue";
   import Intro from "@/components/Intro/Index.vue";
-  import Swiper from "@/components/HomeSwiper/Index.vue";
+  import Swiper from "@/components/MainSwiper/Index.vue";
   import Headline2 from "@/components/Headline2/Index.vue";
   import CardDetail from "@/components/CardDetail/Index.vue";
   import CardSwiper from "@/components/CardSwiper/Index.vue";

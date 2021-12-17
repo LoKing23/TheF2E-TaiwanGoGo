@@ -5,14 +5,23 @@
   import { useGetApiByTimes } from "@/composition-api";
   import { apiGetRandomSpotByCity } from "@/api";
   export default {
-    setup() {
+    props: {
+      swiperName: {
+        type: String,
+        default: "mySwiper",
+      },
+      swiperData: {
+        type: Array,
+        default: () => [],
+      },
+    },
+    setup(props) {
       Swiper.use([Navigation, Pagination]);
       let swiper = null;
       const apiData = reactive({});
       //取得6筆隨機景點資訊
-
       const initSwiper = () => {
-        swiper = new Swiper(".mySwiper", {
+        swiper = new Swiper(`.${props.swiperName}`, {
           slidesPerView: 1,
           loop: false,
           pagination: {
@@ -39,13 +48,14 @@
       });
       return {
         apiData,
+        props,
       };
     },
   };
 </script>
 <template>
   <div class="swiper-container">
-    <div class="swiper mySwiper">
+    <div :class="['swiper', props.swiperName]">
       <div class="swiper-wrapper">
         <div v-for="item in apiData.arr" :key="item.Name" class="swiper-slide">
           <router-link :data-city="item.City" :data-area="item.Name" to="/">
@@ -102,10 +112,8 @@
 </template>
 <style lang="scss" scoped>
   .swiper-container {
-    padding: 0 15px;
     margin-bottom: 24px;
     @media (min-width: 1200px) {
-      padding: 0 45px;
       margin-bottom: 36px;
     }
   }
