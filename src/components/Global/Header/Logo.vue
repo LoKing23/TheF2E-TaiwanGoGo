@@ -5,6 +5,10 @@
         type: Boolean,
         dafault: false,
       },
+      HandCloseOpen: {
+        type: Function,
+        default: () => {},
+      },
     },
     setup(props) {
       return {
@@ -14,7 +18,11 @@
   };
 </script>
 <template>
-  <router-link to="/" :class="{ active: props.isOpen }">
+  <router-link
+    to="/"
+    @click="props.HandCloseOpen()"
+    :class="{ active: props.isOpen }"
+  >
     <picture>
       <source
         srcset="@/assets/Icon/Logo-desktop.svg"

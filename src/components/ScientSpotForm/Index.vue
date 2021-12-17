@@ -19,8 +19,6 @@
             citySelected: "all",
             allCity,
           },
-          //date
-          date: new Date(),
           //input:text
           keyWord: "",
         }),
@@ -36,22 +34,21 @@
   };
 </script>
 <template>
-  <div class="container-ActivityForm">
+  <div class="container-ScientSpotForm">
     <SelectBar :form="props.data" />
-    <DateBar :form="props.data" />
     <TextBar :form="props.data" />
     <SearchBar :HandClick="props.HandClick" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .container-ActivityForm > :not(:first-child) {
+  .container-ScientSpotForm > :not(:first-child) {
     margin-top: 8px;
     @media (min-width: 1200px) {
       margin-top: unset;
     }
   }
-  .container-ActivityForm {
+  .container-ScientSpotForm {
     margin-bottom: 24px;
     @media (min-width: 1200px) {
       display: flex;
@@ -61,23 +58,17 @@
     }
     select {
       @media (min-width: 1200px) {
-        width: 22%;
-      }
-    }
-    .dp__main {
-      height: 100%;
-      @media (min-width: 1200px) {
-        width: 22%;
+        width: 35%;
       }
     }
     > input[type="text"] {
       @media (min-width: 1200px) {
-        width: 34.25%;
+        flex-grow: 1;
       }
     }
     > .search {
       @media (min-width: 1200px) {
-        width: 16%;
+        width: 30%;
       }
     }
   }

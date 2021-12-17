@@ -44,3 +44,8 @@ export const getRandomRestaurantByCity = () => {
       $format=JSON`,
   );
 };
+export const getRestaurantByCity = (city = allCity[0], filter = "") => {
+  console.log(city);
+  console.log("getRandomRestaurantByCity", filter);
+  return restaurantRequest.get(`${city}?${filter}&$format=JSON`);
+};

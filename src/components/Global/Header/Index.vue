@@ -12,9 +12,16 @@
       const HandIsOpen = () => {
         isOpen.value = !isOpen.value;
       };
+      const HandCloseOpen = () => {
+        console.log(isOpen.value);
+        if (isOpen.value) {
+          isOpen.value = false;
+        }
+      };
       return {
         isOpen,
         HandIsOpen,
+        HandCloseOpen,
       };
     },
   };
@@ -22,8 +29,12 @@
 <template>
   <header :class="{ active: isOpen }">
     <div class="container">
-      <Logo :isOpen="isOpen" />
-      <NavBar :isOpen="isOpen" :HandIsOpen="HandIsOpen" />
+      <Logo :isOpen="isOpen" :HandCloseOpen="HandCloseOpen" />
+      <NavBar
+        :isOpen="isOpen"
+        :HandIsOpen="HandIsOpen"
+        :HandCloseOpen="HandCloseOpen"
+      />
     </div>
   </header>
 </template>

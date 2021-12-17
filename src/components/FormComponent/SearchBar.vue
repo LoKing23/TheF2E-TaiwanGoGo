@@ -1,7 +1,7 @@
 <script>
   export default {
     props: {
-      clickHand: {
+      HandClick: {
         type: Function,
         default: () => {},
       },
@@ -14,7 +14,7 @@
   };
 </script>
 <template>
-  <a href="javascript:;" class="search" @click.prevent="props.clickHand">
+  <a href="javascript:;" class="search" @click.prevent="props.HandClick">
     <img src="@/assets/Icon/search30.svg" alt="" />
     <span>搜尋</span>
   </a>

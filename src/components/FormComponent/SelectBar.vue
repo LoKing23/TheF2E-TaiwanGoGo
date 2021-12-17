@@ -18,7 +18,7 @@
 </script>
 <template>
   <select v-model="props.form.city.citySelected">
-    <option value="all" selected>全部縣市</option>
+    <option value="all" key="all">全部縣市</option>
     <option
       v-for="item in props.form.city.allCity"
       :key="item.cityName"

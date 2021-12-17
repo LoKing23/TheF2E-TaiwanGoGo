@@ -40,3 +40,6 @@ export const getRandomActivityByCity = () => {
       $format=JSON`,
   );
 };
+export const getActivityByCity = (city = allCity[0], filter = "") => {
+  return activityRequest.get(`${city}?${filter}$format=JSON`);
+};

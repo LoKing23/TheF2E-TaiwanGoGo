@@ -2,11 +2,15 @@
   export default {
     props: {
       isOpen: {
-        typeof: Boolean,
+        type: Boolean,
         default: false,
       },
       HandIsOpen: {
-        typeof: Function,
+        type: Function,
+        default: () => {},
+      },
+      HandCloseOpen: {
+        type: Function,
         default: () => {},
       },
     },
@@ -25,13 +29,19 @@
   <nav :class="{ active: props.isOpen }">
     <ul class="list">
       <li class="list-item">
-        <router-link to="/scientSpot"> 探索景點 </router-link>
+        <router-link to="/scientSpot" @click.prevent="props.HandCloseOpen()">
+          探索景點
+        </router-link>
       </li>
       <li class="list-item">
-        <router-link to="/activity"> 節慶活動 </router-link>
+        <router-link to="/activity" @click.prevent="props.HandCloseOpen()">
+          節慶活動
+        </router-link>
       </li>
       <li class="list-item">
-        <router-link to="/restaurant"> 品嚐美食 </router-link>
+        <router-link to="/restaurant" @click.prevent="props.HandCloseOpen()">
+          品嚐美食
+        </router-link>
       </li>
     </ul>
   </nav>

@@ -1,4 +1,6 @@
 <script>
+  import test from "@/assets/LV2-img/Activity/bg2.png";
+  import { ref, watch } from "vue";
   export default {
     props: {
       hotClass: {
@@ -10,35 +12,36 @@
           },
         ],
       },
+      HandHotClassSearch: {
+        type: Function,
+        default: () => {},
+      },
     },
     setup(props) {
-      return { props };
+      const img = ref(null);
+      return { props, img };
     },
   };
 </script>
 <template>
   <div class="cards">
-    <!-- 複製v-for其中一個結果，可以顯示 -->
-    <div class="card" data-v-2c8c1f57="">
-      <div class="imgWrap" data-class="節慶活動" data-v-2c8c1f57="">
-        <img
-          src="@/assets/LV2-img/Activity/bg1.png"
-          alt="節慶活動"
-          data-v-2c8c1f57=""
-        />
-      </div>
-    </div>
     <!-- 透過v-for渲染卡片 -->
     <div class="card" v-for="item in props.hotClass" :key="item.imgUrl">
-      <div class="imgWrap" :data-class="item.className">
+      <a
+        class="imgWrap"
+        :data-class="item.className"
+        @click.prevent="HandHotClassSearch(item.className)"
+      >
         <img :src="item.imgUrl" :alt="item.className" />
-        {{ item.imgUrl }}
-      </div>
+      </a>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+  a {
+    cursor: pointer;
+  }
   .cards {
     display: flex;
     flex-flow: wrap;
@@ -62,6 +65,7 @@
       }
     }
     .imgWrap {
+      display: block;
       border-radius: 24px;
       overflow: hidden;
       position: relative;

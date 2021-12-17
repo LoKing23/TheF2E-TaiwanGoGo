@@ -44,3 +44,9 @@ export const getRandomSpotByCity = () => {
       $format=JSON`,
   );
 };
+
+export const getSpotByCity = (city = allCity[0], filter = "") => {
+  console.log(city);
+  console.log("getSpotByCity", filter);
+  return scenicSpotRequestByCity.get(`${city}?${filter}&$format=JSON`);
+};

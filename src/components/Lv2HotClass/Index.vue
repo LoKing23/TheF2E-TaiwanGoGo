@@ -14,6 +14,14 @@
           hotClass: [],
         }),
       },
+      isSearch: {
+        type: Boolean,
+        default: false,
+      },
+      HandHotClassSearch: {
+        type: Function,
+        default: () => {},
+      },
     },
     setup(props) {
       return { props };
@@ -21,9 +29,12 @@
   };
 </script>
 <template>
-  <div class="container-H2HotClass">
+  <div v-if="!props.isSearch" class="container-H2HotClass">
     <Headline :title="props.hotClassData.title" />
-    <HotClass :hotClass="props.hotClassData.hotClass" />
+    <HotClass
+      :hotClass="props.hotClassData.hotClass"
+      :HandHotClassSearch="HandHotClassSearch"
+    />
   </div>
 </template>
 
