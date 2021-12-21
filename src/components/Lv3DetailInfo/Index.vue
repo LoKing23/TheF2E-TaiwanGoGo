@@ -21,10 +21,13 @@
 <style lang="scss" scoped>
   .Lv3DetailInfo-container {
     padding: 30px 15px;
+    margin: 0 -15px;
     background-color: #f9f9f9;
     @media (min-width: 1200px) {
       padding: 60px 45px;
       background: #fff;
+      display: flex;
+      flex-wrap: wrap;
     }
   }
 </style>

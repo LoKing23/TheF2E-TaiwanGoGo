@@ -3,11 +3,12 @@
 ## 首頁
 完成度80%
 缺少：
-- loading動畫
+- loading過場
 - 優化random系列的api，一次可以打多筆
 - api錯誤處理
 - 大輪播切換時的切角細節
-
+- intro的搜尋 （大工程）
+L2資料必須用vuex串接，不然挺麻煩的
 ## LV2頁面
 完成度70%
 待解決:
@@ -23,5 +24,12 @@
 2,3可時用computed先處理也可以使用directive來處理 -> 1,2使用computed篩掉
 
 
-待優化:
+
+
+## Lv3頁面
+完成度40%
+各個api的資訊不一致，使用v-if過濾出不同api顯示的資訊
+
+其他:
 - 動態加載圖片從static換成異步import+錯誤處理（現在直接放在static裡）
+- github page不使用動態也出不來

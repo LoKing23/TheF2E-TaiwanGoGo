@@ -9,6 +9,10 @@
         type: String,
         default: "",
       },
+      linkTo: {
+        type: String,
+        default: "/",
+      },
     },
     setup(props) {
       return {
@@ -20,7 +24,7 @@
 <template>
   <div class="container">
     <h2>{{ props.title }}</h2>
-    <router-link to="/">
+    <router-link :to="props.linkTo">
       {{ props.linkMessage }}
       <svg
         width="16"

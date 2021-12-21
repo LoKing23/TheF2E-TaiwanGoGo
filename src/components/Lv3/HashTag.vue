@@ -3,7 +3,7 @@
     props: {
       hashTags: {
         type: Array,
-        default: () => ["hashTag1", "hashTag2"],
+        default: () => [],
       },
     },
     setup(props) {
@@ -12,7 +12,7 @@
   };
 </script>
 <template>
-  <div class="HashTag-container">
+  <div v-if="props.hashTags.length" class="HashTag-container">
     <ul class="hashTags">
       <li v-for="item in props.hashTags" :key="item" class="item">
         {{ item }}

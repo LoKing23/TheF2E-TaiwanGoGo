@@ -7,7 +7,5 @@ const activityRequest = axios.create({
 });
 
 export const getActivity = (filter = "") => {
-  console.log(filter);
-  console.log("headers: ", GetAuthorizationHeader());
   return activityRequest.get(`?${filter}&$format=JSON`);
 };

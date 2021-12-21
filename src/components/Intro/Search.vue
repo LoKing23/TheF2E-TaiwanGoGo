@@ -1,12 +1,36 @@
 <script>
-  export default {};
+  import {
+    apiGetActivity,
+    apiGetScenicSpot,
+    apiGetRestaurantRequest,
+  } from "@/api";
+  import { computed, ref } from "vue";
+  export default {
+    setup() {
+      const selectValue = ref("scenicSpot");
+      const api = computed(() => {
+        switch (selectValue.value) {
+          case "scenicSpot":
+            return apiGetScenicSpot;
+          case "activity":
+            return apiGetActivity;
+          case "restaurant":
+            return apiGetRestaurantRequest;
+        }
+      });
+
+      return { selectValue, api };
+    },
+  };
 </script>
 <template>
   <div class="input-group">
-    <select name="" id="">
-      <option value="探索景點">探索景點</option>
-      <option value="探索景點">節慶活動</option>
-      <option value="探索景點">品嚐美食</option>
+    {{ selectValue }}
+    {{ api }}
+    <select v-model="selectValue">
+      <option value="scenicSpot">探索景點</option>
+      <option value="activity">節慶活動</option>
+      <option value="restaurant">品嚐美食</option>
     </select>
     <input type="text" placeholder="你想去哪裡？請輸入關鍵字" />
     <a href="javascript:;" class="search">

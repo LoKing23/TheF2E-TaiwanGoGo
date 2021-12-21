@@ -2,8 +2,7 @@
   import { onMounted, reactive } from "@vue/runtime-core";
   import Swiper, { Navigation, Pagination } from "swiper";
   import "swiper/swiper-bundle.css";
-  import { useGetApiByTimes } from "@/composition-api";
-  import { apiGetRandomSpotByCity } from "@/api";
+
   export default {
     props: {
       swiperName: {
@@ -18,9 +17,8 @@
     setup(props) {
       Swiper.use([Navigation, Pagination]);
       let swiper = null;
-      const apiData = reactive({});
-      //取得6筆隨機景點資訊
-      const initSwiper = () => {
+
+      onMounted(() => {
         swiper = new Swiper(`.${props.swiperName}`, {
           slidesPerView: 1,
           loop: false,
@@ -36,18 +34,8 @@
             disabledClass: "swiper-my-button-disabled",
           },
         });
-      };
-      onMounted(() => {
-        useGetApiByTimes(apiGetRandomSpotByCity, 6)
-          .then((res) => {
-            apiData.arr = res;
-          })
-          .then(() => {
-            initSwiper();
-          });
       });
       return {
-        apiData,
         props,
       };
     },
@@ -57,7 +45,11 @@
   <div class="swiper-container">
     <div :class="['swiper', props.swiperName]">
       <div class="swiper-wrapper">
-        <div v-for="item in apiData.arr" :key="item.Name" class="swiper-slide">
+        <div
+          v-for="item in props.swiperData"
+          :key="item.Name"
+          class="swiper-slide"
+        >
           <router-link :data-city="item.City" :data-area="item.Name" to="/">
             <img :src="item.Picture.PictureUrl1" />
           </router-link>

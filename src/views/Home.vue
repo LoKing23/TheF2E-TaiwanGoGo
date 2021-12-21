@@ -1,12 +1,13 @@
 <script>
   import { useStore } from "vuex";
-  import { ref, reactive, onMounted, watch, computed } from "vue";
+  import { reactive, onMounted } from "vue";
   import Intro from "@/components/Intro/Index.vue";
   import Swiper from "@/components/MainSwiper/Index.vue";
   import Headline2 from "@/components/Headline2/Index.vue";
   import CardDetail from "@/components/CardDetail/Index.vue";
   import CardSwiper from "@/components/CardSwiper/Index.vue";
-  import { apiGetRandomActivityByCity } from "@/api";
+  import { apiGetRandomActivityByCity, apiGetRandomSpotByCity } from "@/api";
+  import { useGetApiByTimes } from "@/composition-api";
   export default {
     components: {
       Intro,
@@ -25,22 +26,26 @@
         console.log("activity");
         console.log(res.data);
       });
+      const mainSwiperData = reactive({ swiperName: "Home", data: [] });
       const store = useStore();
       //scientSpot 同步
       information.scientSpot = {
         title: store.getters["ScientSpot/getTitle"],
         linkMessage: store.getters["ScientSpot/getLinkMessage"],
         swiperName: store.getters["ScientSpot/getSwiperName"],
+        linkTo: "/scientSpot",
       };
       information.restaurant = {
         title: store.getters["Restaurant/getTitle"],
         linkMessage: store.getters["Restaurant/getLinkMessage"],
         swiperName: store.getters["Restaurant/getSwiperName"],
+        linkTo: "/restaurant",
       };
       information.activity = {
         title: store.getters["Activity/getTitle"],
         linkMessage: store.getters["Activity/getLinkMessage"],
         swiperName: store.getters["Activity/getSwiperName"],
+        linkTo: "/activity",
       };
       onMounted(() => {
         //Activity 非同步
@@ -56,10 +61,15 @@
         store.dispatch("Restaurant/loadApi").then((res) => {
           information.restaurant.arr = res;
         });
+        //MainSwiper
+        useGetApiByTimes(apiGetRandomSpotByCity, 6).then((res) => {
+          mainSwiperData.data = res;
+        });
       });
 
       return {
         information,
+        mainSwiperData,
       };
     },
   };
@@ -67,11 +77,15 @@
 <template>
   <Intro />
 
-  <Swiper />
+  <Swiper
+    :swiperName="mainSwiperData.swiperName"
+    :swiperData="mainSwiperData.data"
+  />
   <!-- 近期活動 -->
   <Headline2
     :title="information.activity.title"
     :linkMessage="information.activity.linkMessage"
+    :linkTo="information.activity.linkTo"
   />
   <CardDetail
     :swiperName="information.activity.swiperName"
@@ -82,6 +96,7 @@
   <Headline2
     :title="information.scientSpot.title"
     :linkMessage="information.scientSpot.linkMessage"
+    :linkTo="information.scientSpot.linkTo"
   />
   <CardSwiper
     :swiperName="information.scientSpot.swiperName"
@@ -92,6 +107,7 @@
   <Headline2
     :title="information.restaurant.title"
     :linkMessage="information.restaurant.linkMessage"
+    :linkTo="information.restaurant.linkTo"
   />
   <CardSwiper
     :swiperName="information.restaurant.swiperName"
@@ -99,4 +115,4 @@
   />
 </template>
 
-<style></style>
+<style scoped></style>

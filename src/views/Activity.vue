@@ -7,6 +7,7 @@
   import Lv2HotClass from "@/components/Lv2HotClass/Index.vue";
   import SearchResult from "@/components/SearchResult/Index.vue";
   import { useMapLv2Img } from "@/composition-api";
+
   export default {
     components: {
       ActivityForm,
@@ -87,11 +88,11 @@
         if (form.data.city.citySelected === "all") {
           if (filter) {
             result = await apiGetActivity(`$filter=${filter}`);
-
             console.log("Top");
           } else {
             console.log("bottom");
             result = await apiGetActivity();
+            console.log(result);
           }
         } else {
           if (filter) {

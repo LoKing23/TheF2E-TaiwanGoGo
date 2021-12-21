@@ -12,7 +12,9 @@
   };
 </script>
 <template>
-  <h1>{{ props.title }}</h1>
+  <div class="headline-container">
+    <h1>{{ props.title }}</h1>
+  </div>
 </template>
 
 <style lang="scss" scoped>

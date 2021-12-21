@@ -66,11 +66,12 @@
         }
         if (form.data.city.citySelected === "all") {
           if (filter) {
-            result = await apiGetScenicSpot(`$filter=${filter}`);
+            result = await apiGetScenicSpot(`$filter=${filter}sadfasdfas`);
             console.log("Top");
           } else {
             console.log("bottom");
             result = await apiGetScenicSpot();
+            console.log(result);
           }
         } else {
           if (filter) {

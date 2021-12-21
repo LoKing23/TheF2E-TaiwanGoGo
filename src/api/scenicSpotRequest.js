@@ -6,6 +6,5 @@ const scenicSpotRequest = axios.create({
 });
 
 export const getScenicSpot = (filter) => {
-  console.log("ScenicSpot", filter);
   return scenicSpotRequest.get(`?${filter}&$format=JSON`);
 };

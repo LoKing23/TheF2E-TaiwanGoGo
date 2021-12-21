@@ -26,6 +26,7 @@
 
 <style lang="scss" scoped>
   .content-container {
+    padding-top: 16px;
     padding-bottom: 30px;
     @media (min-width: 1200px) {
       padding-bottom: 60px;
@@ -39,6 +40,7 @@
     p {
       font-size: 18px;
       font-weight: 300;
+      text-indent: 1em;
     }
   }
 </style>
