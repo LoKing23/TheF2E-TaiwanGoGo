@@ -101,6 +101,7 @@
     <CardSwiper
       :swiperName="information.scientSpot.swiperName"
       :data="information.scientSpot.arr"
+      Lv2Type="scientSpot"
     />
 
     <!-- 附近美食 -->
@@ -112,6 +113,7 @@
     <CardSwiper
       :swiperName="information.restaurant.swiperName"
       :data="information.restaurant.arr"
+      Lv2Type="restaurant"
     />
   </div>
 </template>

@@ -12,6 +12,10 @@
         type: Array,
         default: () => [],
       },
+      Lv2Type: {
+        type: String,
+        default: "",
+      },
     },
     setup(props) {
       let swiperAttraction = null;
@@ -36,7 +40,7 @@
     <div :class="['swiper', props.swiperName]">
       <div class="swiper-wrapper">
         <div v-for="item in props.data" :key="item.Name" class="swiper-slide">
-          <div class="card">
+          <router-link :to="`/${props.Lv2Type}/${item.ID}`" class="card">
             <div class="imgWrap">
               <img :src="item.Picture.PictureUrl1" />
             </div>
@@ -56,7 +60,7 @@
               </svg>
               <span>{{ item.City }}</span>
             </div>
-          </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -98,6 +102,7 @@
     }
   }
   h3 {
+    color: #000;
     text-align-last: left;
     font-size: 18px;
     font-weight: 700;

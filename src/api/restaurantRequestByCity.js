@@ -37,7 +37,6 @@ export const getRandomRestaurantByCity = () => {
   const randomSpot = Math.floor(Math.random() * 5) + 1;
   return restaurantRequest.get(
     `${city}?
-      $select=Name,City,Picture&
       $top=${randomSpot}&
       $skip=${randomSpot - 1}&
       $format=JSON`,

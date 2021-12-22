@@ -57,7 +57,7 @@
               </svg>
               <span>{{ item.City }}</span>
             </div>
-            <router-link class="readMore" to="/">
+            <router-link class="readMore" :to="`/activity/${item.ID}`">
               <span>詳細介紹</span>
               <svg
                 width="16"

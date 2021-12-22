@@ -38,7 +38,6 @@ export const getRandomSpotByCity = () => {
 
   return scenicSpotRequestByCity.get(
     `${city}?
-      $select=Name,City,Picture&
       $top=${randomSpot}&
       $skip=${randomSpot - 1}&
       $format=JSON`,
