@@ -50,7 +50,11 @@
           :key="item.Name"
           class="swiper-slide"
         >
-          <router-link :data-city="item.City" :data-area="item.Name" to="/">
+          <router-link
+            :data-city="item.City"
+            :data-area="item.Name"
+            :to="`/scientSpot/${item.ID}`"
+          >
             <img :src="item.Picture.PictureUrl1" />
           </router-link>
         </div>
