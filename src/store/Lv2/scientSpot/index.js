@@ -90,6 +90,13 @@ export default {
       commit("setSearchResult", result.data);
       commit("setSearchState", true);
     },
+    apiRequest({ commit, getters }, filter) {
+      apiGetScenicSpot(`filter=${filter}`).then((res) => {
+        console.log(res.data);
+        commit("setSearchResult", res.data);
+        commit("setSearchState", true);
+      });
+    },
   },
   mutations: {
     //將傳入的圖片路徑與className作binding

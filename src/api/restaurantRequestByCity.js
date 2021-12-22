@@ -35,7 +35,6 @@ export const getRandomRestaurantByCity = () => {
   const city = allCity[randomIndex];
   //隨機前5筆資料
   const randomSpot = Math.floor(Math.random() * 5) + 1;
-  console.log(randomSpot);
   return restaurantRequest.get(
     `${city}?
       $select=Name,City,Picture&

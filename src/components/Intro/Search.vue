@@ -5,35 +5,48 @@
     apiGetRestaurantRequest,
   } from "@/api";
   import { computed, ref } from "vue";
+  import { useRouter } from "vue-router";
+  import { useStore } from "vuex";
+
   export default {
     setup() {
+      const store = useStore();
+      const router = useRouter();
+      console.log("router:", router);
+
       const selectValue = ref("scenicSpot");
-      const api = computed(() => {
+      const search = computed(() => {
         switch (selectValue.value) {
           case "scenicSpot":
-            return apiGetScenicSpot;
+            return { store: "Lv2ScientSpot", router: "/scientSpot" };
           case "activity":
-            return apiGetActivity;
+            return { store: "Lv2Activity", router: "/activity" };
           case "restaurant":
-            return apiGetRestaurantRequest;
+            return { store: "Lv2Restaurant", router: "/restaurant" };
         }
       });
-
-      return { selectValue, api };
+      const filter = computed(() => {
+        return `$filter=contains(Name, '${selectValue.value}')`;
+      });
+      const HandSearch = () => {
+        store.dispatch(`${search.value.store}/apiRequest`, filter);
+        router.push({
+          path: search.value.router,
+        });
+      };
+      return { selectValue, search, HandSearch };
     },
   };
 </script>
 <template>
   <div class="input-group">
-    {{ selectValue }}
-    {{ api }}
     <select v-model="selectValue">
       <option value="scenicSpot">探索景點</option>
       <option value="activity">節慶活動</option>
       <option value="restaurant">品嚐美食</option>
     </select>
     <input type="text" placeholder="你想去哪裡？請輸入關鍵字" />
-    <a href="javascript:;" class="search">
+    <a href="javascript:;" class="search" @click.prevent="HandSearch">
       <img src="@/assets/Icon/search30.svg" alt="" />
       <span>搜尋</span>
     </a>
