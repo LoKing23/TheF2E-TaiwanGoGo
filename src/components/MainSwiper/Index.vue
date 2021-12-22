@@ -104,8 +104,10 @@
 </template>
 <style lang="scss" scoped>
   .swiper-container {
+    padding: 15px;
     margin-bottom: 24px;
     @media (min-width: 1200px) {
+      padding: 0 45px;
       margin-bottom: 36px;
     }
   }

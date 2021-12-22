@@ -38,7 +38,7 @@
 <template>
   <div class="container-ActivityForm">
     <SelectBar :form="props.data" />
-    <DateBar :form="props.data" />
+    <!-- <DateBar :form="props.data" /> -->
     <TextBar :form="props.data" />
     <SearchBar :HandClick="props.HandClick" />
   </div>
@@ -73,11 +73,13 @@
     > input[type="text"] {
       @media (min-width: 1200px) {
         width: 34.25%;
+        flex-grow: 1;
       }
     }
     > .search {
       @media (min-width: 1200px) {
-        width: 16%;
+        width: 18.5%;
+        // width: 16%;
       }
     }
   }

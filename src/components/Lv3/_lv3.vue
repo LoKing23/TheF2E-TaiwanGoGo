@@ -7,7 +7,7 @@
   import Lv3DetailInfo from "@/components/Lv3DetailInfo/Index.vue";
   import Headline2 from "@/components/Headline2/Index.vue";
   import CardSwiper from "@/components/CardSwiper/Index.vue";
-  import { reactive, ref, onMounted } from "vue";
+  import { reactive, ref, onMounted, computed } from "vue";
   import { useGetApiByTimes } from "@/composition-api";
   import { useRoute, useRouter } from "vue-router";
   import {
@@ -41,13 +41,20 @@
       const subTitle = ref("");
       const route = useRoute();
       const cardSwiper = reactive({});
-      const lv2 = route.params.lv2;
+      const lv2 = ref(route.params.lv2);
       const lv3 = route.params.lv3;
+      const content = computed(() => {
+        if (apiData.DescriptionDetail) {
+          return apiData.DescriptionDetail;
+        } else {
+          return apiData.Description;
+        }
+      });
       //main API
       let api = null;
       //cardSwiper API
       let apiCardSwiper = null;
-      switch (lv2) {
+      switch (lv2.value) {
         case "scientSpot":
           api = apiGetScenicSpot;
           //breadcrumb
@@ -106,6 +113,8 @@
         breadcrumb,
         subTitle,
         cardSwiper,
+        lv2,
+        content,
       };
     },
   };
@@ -120,9 +129,12 @@
     />
     <Headline :title="apiData.Name" />
     <HashTag />
-    <Content :title="subTitle" :paragraph="apiData.DescriptionDetail" />
-    <Lv3DetailInfo />
-    <Headline2 title="不能錯過" linkMessage="更多宜蘭縣景點" />
+    <Content
+      :title="subTitle"
+      :paragraph="apiData.DescriptionDetail || apiData.Description"
+    />
+    <Lv3DetailInfo :apiData="apiData" :lv2Type="lv2" />
+    <Headline2 title="不能錯過" linkMessage="更多景點" />
     <CardSwiper swiperName="lv3" :data="cardSwiper.data" />
   </div>
 
@@ -133,6 +145,9 @@
 
 <style lang="scss" scoped>
   .lv3-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 24px 15px;
     @media (min-width: 1200px) {
       padding: 60px 45px;

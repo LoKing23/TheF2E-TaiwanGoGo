@@ -1,5 +1,4 @@
 <script>
-  import test from "@/assets/LV2-img/Activity/bg2.png";
   import { ref, watch } from "vue";
   export default {
     props: {

@@ -14,6 +14,10 @@
         type: Object,
         default: () => ({}),
       },
+      lv2Type: {
+        type: String,
+        default: "",
+      },
     },
     setup(props) {
       //取得資料數量
@@ -31,6 +35,7 @@
     <Result
       :isSearch="props.search.isSearch"
       :searchResult="props.search.searchResult"
+      :lv2Type="props.lv2Type"
     />
     <NoResult
       :isSearch="props.search.isSearch"

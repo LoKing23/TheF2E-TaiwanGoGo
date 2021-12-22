@@ -4,14 +4,14 @@
     props: {
       position: {
         type: Array,
-        default: () => [23, 121],
+        default: () => [22.633939743041992, 121.49990844726562],
       },
     },
     setup(props) {
       const mapSrc = computed(() => {
-        return `https://www.google.com/maps/embed/v1/view?key=AIzaSyAfrjip-GOWFUI7lFY9x0Yq4iFlsVbuQc8&center=${props.position[0]},${props.position[1]}&zoom=15&maptype=roadmap`;
+        return `https://www.google.com/maps/embed/v1/view?key=AIzaSyAfrjip-GOWFUI7lFY9x0Yq4iFlsVbuQc8&center=${props.position[1]},${props.position[0]}&zoom=15&maptype=roadmap`;
       });
-      return { mapSrc };
+      return { mapSrc, props };
     },
   };
 </script>

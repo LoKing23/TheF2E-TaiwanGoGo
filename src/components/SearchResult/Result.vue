@@ -1,5 +1,5 @@
 <script>
-  import { computed } from "@vue/reactivity";
+  import { computed, ref } from "@vue/reactivity";
   export default {
     props: {
       searchResult: {
@@ -10,30 +10,41 @@
         type: Boolean,
         default: false,
       },
+      lv2Type: {
+        type: String,
+        default: "",
+      },
     },
     setup(props) {
+      import("@/assets/NoImage-img/NoImage-255x200.png").then((res) => {
+        notFoundImg.value = res.default;
+      });
       const showResult = computed(
         () => props.isSearch && props.searchResult.length,
       );
+      let notFoundImg = ref(null);
+
       const apiResult = computed(() => {
         return props.searchResult.map((item) => {
           let name = item.Name;
           let imgUrl = item.Picture.PictureUrl1
             ? item.Picture.PictureUrl1
-            : "/assets/NoImage-img/NoImage-255x200.png";
+            : notFoundImg.value;
           let location = item.City
             ? item.City
             : item.Location
             ? item.Location
             : item.Address;
+          let routerLink = `/${props.lv2Type}/${item.ID}`;
           return {
             name,
             imgUrl,
             location,
+            routerLink,
           };
         });
       });
-      return { showResult, apiResult };
+      return { showResult, apiResult, notFoundImg };
     },
   };
 </script>
@@ -42,7 +53,7 @@
     <!-- {{ apiResult }} -->
     <div class="cards">
       <div v-for="item in apiResult" :key="item.name" class="card">
-        <router-link class="card-imgWrap" to="/">
+        <router-link class="card-imgWrap" :to="item.routerLink">
           <img :src="item.imgUrl" />
         </router-link>
         <div class="card-text">
@@ -126,8 +137,9 @@
       justify-content: space-between;
     }
     .card-location {
-      display: flex;
-      align-items: center;
+      // margin-bottom: auto;
+      text-indent: -1em;
+      padding-left: 1em;
       .card-icon {
         margin-right: 4px;
       }

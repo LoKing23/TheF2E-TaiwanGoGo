@@ -51,7 +51,6 @@
         //Activity 非同步
         store.dispatch("Activity/loadApi").then((res) => {
           information.activity.arr = res;
-          console.log(res);
         });
         //scientSpot 非同步
         store.dispatch("ScientSpot/loadApi").then((res) => {
@@ -75,44 +74,52 @@
   };
 </script>
 <template>
-  <Intro />
+  <div class="home-container">
+    <Intro />
 
-  <Swiper
-    :swiperName="mainSwiperData.swiperName"
-    :swiperData="mainSwiperData.data"
-  />
-  <!-- 近期活動 -->
-  <Headline2
-    :title="information.activity.title"
-    :linkMessage="information.activity.linkMessage"
-    :linkTo="information.activity.linkTo"
-  />
-  <CardDetail
-    :swiperName="information.activity.swiperName"
-    :data="information.activity.arr"
-  />
+    <Swiper
+      :swiperName="mainSwiperData.swiperName"
+      :swiperData="mainSwiperData.data"
+    />
+    <!-- 近期活動 -->
+    <Headline2
+      :title="information.activity.title"
+      :linkMessage="information.activity.linkMessage"
+      :linkTo="information.activity.linkTo"
+    />
+    <CardDetail
+      :swiperName="information.activity.swiperName"
+      :data="information.activity.arr"
+    />
 
-  <!-- 附近景點 -->
-  <Headline2
-    :title="information.scientSpot.title"
-    :linkMessage="information.scientSpot.linkMessage"
-    :linkTo="information.scientSpot.linkTo"
-  />
-  <CardSwiper
-    :swiperName="information.scientSpot.swiperName"
-    :data="information.scientSpot.arr"
-  />
+    <!-- 附近景點 -->
+    <Headline2
+      :title="information.scientSpot.title"
+      :linkMessage="information.scientSpot.linkMessage"
+      :linkTo="information.scientSpot.linkTo"
+    />
+    <CardSwiper
+      :swiperName="information.scientSpot.swiperName"
+      :data="information.scientSpot.arr"
+    />
 
-  <!-- 附近美食 -->
-  <Headline2
-    :title="information.restaurant.title"
-    :linkMessage="information.restaurant.linkMessage"
-    :linkTo="information.restaurant.linkTo"
-  />
-  <CardSwiper
-    :swiperName="information.restaurant.swiperName"
-    :data="information.restaurant.arr"
-  />
+    <!-- 附近美食 -->
+    <Headline2
+      :title="information.restaurant.title"
+      :linkMessage="information.restaurant.linkMessage"
+      :linkTo="information.restaurant.linkTo"
+    />
+    <CardSwiper
+      :swiperName="information.restaurant.swiperName"
+      :data="information.restaurant.arr"
+    />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+  .home-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>

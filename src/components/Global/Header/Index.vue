@@ -28,7 +28,7 @@
 </script>
 <template>
   <header :class="{ active: isOpen }">
-    <div class="container">
+    <div :class="['container', { 'mr-0': isOpen }]">
       <Logo :isOpen="isOpen" :HandCloseOpen="HandCloseOpen" />
       <NavBar
         :isOpen="isOpen"
@@ -39,16 +39,27 @@
   </header>
 </template>
 <style lang="scss" scoped>
-  header .container {
+  header {
     width: 100%;
-    padding: 8px;
-    background-color: #fff;
     position: fixed;
     z-index: 10;
     top: 0;
     @media (min-width: 1200px) {
-      padding: 24px 45px;
       border-bottom: 1px solid #e5e5e5;
+    }
+  }
+  header .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px;
+    background-color: #fff;
+    &.mr-0 {
+      margin-right: 0;
+    }
+    @media (min-width: 1200px) {
+      padding: 24px 45px;
+
       display: flex;
       justify-content: space-between;
       align-items: center;

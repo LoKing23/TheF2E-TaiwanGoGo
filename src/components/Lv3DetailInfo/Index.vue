@@ -2,18 +2,41 @@
   import BaseInfo from "./BaseInfo.vue";
   import MapIframe from "./MapIframe.vue";
   import AroundInfo from "./AroundInfo.vue";
+  import { computed } from "@vue/reactivity";
+
   export default {
     components: {
       BaseInfo,
       MapIframe,
       AroundInfo,
     },
+    props: {
+      apiData: {
+        type: Object,
+        default: () => ({}),
+      },
+      lv2Type: {
+        type: String,
+        default: "",
+      },
+    },
+    setup(props) {
+      const position = computed(() => {
+        if (Object.keys(props.apiData).length > 1) {
+          return [
+            props.apiData.Position.PositionLon,
+            props.apiData.Position.PositionLat,
+          ];
+        }
+      });
+      return { props, position };
+    },
   };
 </script>
 <template>
   <div class="Lv3DetailInfo-container">
-    <BaseInfo />
-    <MapIframe />
+    <BaseInfo :apiData="props.apiData" :lv2Type="props.lv2Type" />
+    <MapIframe :position="position" />
     <AroundInfo />
   </div>
 </template>

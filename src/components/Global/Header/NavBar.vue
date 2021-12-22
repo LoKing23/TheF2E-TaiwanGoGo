@@ -1,4 +1,5 @@
 <script>
+  import { useStore } from "vuex";
   export default {
     props: {
       isOpen: {
@@ -15,8 +16,14 @@
       },
     },
     setup(props) {
+      const store = useStore();
+      const HandNav = (Lv2Name) => {
+        props.HandCloseOpen();
+        store.dispatch(`Lv2${Lv2Name}/init`);
+      };
       return {
         props,
+        HandNav,
       };
     },
   };
@@ -29,17 +36,17 @@
   <nav :class="{ active: props.isOpen }">
     <ul class="list">
       <li class="list-item">
-        <router-link to="/scientSpot" @click.prevent="props.HandCloseOpen()">
+        <router-link to="/scientSpot" @click.prevent="HandNav('ScientSpot')">
           探索景點
         </router-link>
       </li>
       <li class="list-item">
-        <router-link to="/activity" @click.prevent="props.HandCloseOpen()">
+        <router-link to="/activity" @click.prevent="HandNav('Activity')">
           節慶活動
         </router-link>
       </li>
       <li class="list-item">
-        <router-link to="/restaurant" @click.prevent="props.HandCloseOpen()">
+        <router-link to="/restaurant" @click.prevent="HandNav('Restaurant')">
           品嚐美食
         </router-link>
       </li>

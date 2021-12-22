@@ -32,7 +32,7 @@
   <div v-if="!props.isSearch" class="container-H2HotClass">
     <Headline :title="props.hotClassData.title" />
     <HotClass
-      :hotClass="props.hotClassData.hotClass"
+      :hotClass="props.hotClassData.imgArr"
       :HandHotClassSearch="HandHotClassSearch"
     />
   </div>

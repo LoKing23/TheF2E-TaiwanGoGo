@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <div v-if="props.haveData" class="swiper-my-button-prev">
+      <div v-if="props.swiperData > 1" class="swiper-my-button-prev">
         <svg
           width="40"
           height="40"
@@ -89,7 +89,7 @@
           />
         </svg>
       </div>
-      <div v-if="props.haveData" class="swiper-my-button-next">
+      <div v-if="props.swiperData > 1" class="swiper-my-button-next">
         <svg
           width="40"
           height="40"

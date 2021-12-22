@@ -1,31 +1,24 @@
-export default function mapLv2Img(
-  classNameArr,
-  Lv2ImgData = { className: "", totalNum: 0 },
-) {
-  //動態調用import用法，之後改良
-  // async function getImg(name) {
-  //   const result = await import(`@/assets/LV2-img/Activity/${name}.png`);
-  //   img.value = result.default;
-  // }
-  const { className, totalNum } = Lv2ImgData;
-  const getImgPathfromLv2Img = (className, totalNum) => {
-    const filePath = `/assets/LV2-img/${className}`;
+export default function mapLv2Img(Lv2ImgData = { className: "", totalNum: 0 }) {
+  //根據className 與 照片數量動態取得圖片路徑
+  return new Promise((resole, reject) => {
+    const { className, totalNum } = Lv2ImgData;
     const pathArr = [];
+    let resoleNum = 0;
     for (let i = 0; i < totalNum; i++) {
-      pathArr.push(`${filePath}/bg${i + 1}.png`);
+      import(`@/assets/LV2-img/${className}/bg${i + 1}.png`)
+        .then((res) => {
+          pathArr[i] = res.default;
+          resoleNum++;
+          if (resoleNum === totalNum) {
+            resole(pathArr);
+          }
+        })
+        .catch((err) => {
+          const error = {
+            error_message: "mapLv2Img圖片載入失敗",
+          };
+          reject(error);
+        });
     }
-    return pathArr;
-  };
-
-  const mapClassNameAndImgPath = () => {
-    const imgPathArr = getImgPathfromLv2Img(className, totalNum);
-    const hotClass = imgPathArr.map((item, index) => {
-      return {
-        className: classNameArr[index],
-        imgUrl: item,
-      };
-    });
-    return hotClass;
-  };
-  return mapClassNameAndImgPath();
+  });
 }
