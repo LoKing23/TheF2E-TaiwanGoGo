@@ -33,6 +33,13 @@ export default {
       isSearch: false,
       searchResult: [],
     },
+    pagination: {
+      //每頁顯示筆數
+      PER_PAGE_DISPLAY_DATA: 12,
+      //目前頁面
+      currentPage: 1,
+      totalPage: null,
+    },
   },
   actions: {
     init({ state, commit }) {
@@ -53,8 +60,9 @@ export default {
         `$filter=Class1 eq '${hotClass}' or Class2 eq '${hotClass}'`,
       ).then((res) => {
         console.log(res.data);
-        state.search.searchResult = res.data;
-        state.search.isSearch = true;
+        commit("setSearchResult", res.data);
+        commit("setSearchState", true);
+        commit("setTotalPage");
       });
     },
     // api根據form打
@@ -88,6 +96,7 @@ export default {
       }
       commit("setSearchResult", result.data);
       commit("setSearchState", true);
+      commit("setTotalPage");
     },
     // api依參數條件
     apiRequest({ commit, getters }, filter) {
@@ -95,7 +104,11 @@ export default {
         console.log(res.data);
         commit("setSearchResult", res.data);
         commit("setSearchState", true);
+        commit("setTotalPage");
       });
+    },
+    HandSetCurrentPage({ commit }, index) {
+      commit("setCurrentPage", index);
     },
   },
   mutations: {
@@ -108,6 +121,7 @@ export default {
         };
       });
     },
+    //初始化breadcrumb
     resetBreadcrumb(state) {
       state.breadcrumb = ["首頁", "探索景點"];
     },
@@ -116,6 +130,27 @@ export default {
     },
     setSearchState(state, boolean) {
       state.search.isSearch = boolean;
+    },
+    //根據searchResult和PER_PAGE_DISPLAY_DATA計算總夜市
+    setTotalPage(state) {
+      //有result才計算
+      if (state.search.searchResult.length) {
+        console.log("有計算啦");
+        const totalResult = state.search.searchResult.length;
+        const PER_PAGE_DISPLAY_DATA = state.pagination.PER_PAGE_DISPLAY_DATA;
+        //沒有整除
+        if (totalResult % PER_PAGE_DISPLAY_DATA) {
+          state.pagination.totalPage =
+            Math.floor(totalResult / PER_PAGE_DISPLAY_DATA) + 1;
+          console.log(state.pagination.totalPage);
+        } else {
+          state.pagination.totalPage = totalResult / PER_PAGE_DISPLAY_DATA;
+          console.log(state.pagination.totalPage);
+        }
+      }
+    },
+    setCurrentPage(state, index) {
+      state.pagination.currentPage = index;
     },
   },
   getters: {
@@ -154,6 +189,31 @@ export default {
     },
     getFormCitySelected(state) {
       return state.form.city.citySelected;
+    },
+    getPagination(state) {
+      return state.pagination;
+    },
+    getPaginationCurrentPage(state) {
+      return state.pagination.currentPage;
+    },
+    getPaginationTotalPage(state) {
+      return state.pagination.totalPage;
+    },
+    //取得每個分頁要秀出的data
+    getResultByCurrentPage(state) {
+      const currentPage = state.pagination.currentPage;
+      const totalPage = state.pagination.totalPage;
+      const PER_PAGE_DISPLAY_DATA = state.pagination.PER_PAGE_DISPLAY_DATA;
+      const allResult = state.search.searchResult;
+      //每頁的初始、末尾（不含最後一頁）
+      const start = PER_PAGE_DISPLAY_DATA * (currentPage - 1);
+      const end = PER_PAGE_DISPLAY_DATA * currentPage;
+      // 最後一頁就第一筆到最後
+      if (currentPage === totalPage) {
+        return allResult.slice(start);
+      } else {
+        return allResult.slice(start, end);
+      }
     },
   },
 };

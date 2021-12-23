@@ -8,7 +8,8 @@
 }
 body {
   line-height: 1.5;
-  font-family: "Playfair Display", "Noto Sans TC", sans-serif;
+  scroll-behavior: smooth;
+  font-family: "Roboto", "Playfair Display", "Noto Sans TC", sans-serif;
 }
 ol,
 ul {

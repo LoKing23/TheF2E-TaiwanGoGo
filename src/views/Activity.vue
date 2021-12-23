@@ -3,6 +3,7 @@
   import BreadCrumbs from "@/components/BreadCrumbs/index.vue";
   import Lv2HotClass from "@/components/Lv2HotClass/Index.vue";
   import SearchResult from "@/components/SearchResult/Index.vue";
+  import Pagination from "@/components/Pagination/Index.vue";
   import { useStore } from "vuex";
 
   export default {
@@ -11,9 +12,11 @@
       BreadCrumbs,
       Lv2HotClass,
       SearchResult,
+      Pagination,
     },
     setup() {
       const store = useStore();
+      store.dispatch("Lv2Activity/init");
       //麵包屑路徑
       const breadcrumb = store.getters["Lv2Activity/getBreadcrumb"];
       //渲染熱門主題區域
@@ -24,7 +27,6 @@
       console.log("form", form.city.citySelected);
       //search
       const search = store.getters["Lv2Activity/getSearch"];
-      store.dispatch("Lv2Activity/init");
       function HandFormClick() {
         store.dispatch("Lv2Activity/apiForm");
       }
@@ -58,6 +60,7 @@
       :HandHotClassSearch="HandHotClassSearch"
     />
     <SearchResult :search="search" lv2Type="activity" />
+    <Pagination Lv2Type="Activity" />
   </div>
 </template>
 

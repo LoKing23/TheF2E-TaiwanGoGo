@@ -30,6 +30,7 @@
   }
   .breadcrumb {
     display: flex;
+    flex-wrap: wrap;
     &-item:not(:first-child):before {
       content: "/";
       display: inline-block;

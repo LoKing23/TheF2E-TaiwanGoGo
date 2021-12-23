@@ -8,7 +8,7 @@
   import Headline2 from "@/components/Headline2/Index.vue";
   import CardSwiper from "@/components/CardSwiper/Index.vue";
   import { reactive, ref, onMounted, computed } from "vue";
-  import { useGetApiByTimes } from "@/composition-api";
+  import { useGetApiByTimes, useGoTop } from "@/composition-api";
   import { useRoute, useRouter } from "vue-router";
   import {
     apiGetActivity,
@@ -30,6 +30,8 @@
       CardSwiper,
     },
     setup() {
+      //回到最上
+      useGoTop();
       const swiper = reactive({
         swiperName: "swiper-codingBoy",
         swiperData: [],

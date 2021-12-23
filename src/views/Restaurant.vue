@@ -1,13 +1,10 @@
 <script>
-  import { reactive, ref } from "vue";
-  import allCity from "@/assets/allCity.js";
-
   import Restaurant from "@/components/Restaurant/Index.vue";
   import BreadCrumbs from "@/components/BreadCrumbs/index.vue";
   import Lv2HotClass from "@/components/Lv2HotClass/Index.vue";
   import SearchResult from "@/components/SearchResult/Index.vue";
-  import { useMapLv2Img } from "@/composition-api";
   import { useStore } from "vuex";
+  import Pagination from "@/components/Pagination/Index.vue";
 
   export default {
     components: {
@@ -15,6 +12,7 @@
       Lv2HotClass,
       SearchResult,
       Restaurant,
+      Pagination,
     },
     setup() {
       const store = useStore();
@@ -56,6 +54,7 @@
       :HandHotClassSearch="HandHotClassSearch"
     />
     <SearchResult :search="search" lv2Type="restaurant" />
+    <Pagination Lv2Type="Restaurant" />
   </div>
 </template>
 

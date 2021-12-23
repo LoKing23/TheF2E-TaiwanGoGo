@@ -4,15 +4,18 @@
   import BreadCrumbs from "@/components/BreadCrumbs/index.vue";
   import Lv2HotClass from "@/components/Lv2HotClass/Index.vue";
   import SearchResult from "@/components/SearchResult/Index.vue";
+  import Pagination from "@/components/Pagination/Index.vue";
   export default {
     components: {
       BreadCrumbs,
       Lv2HotClass,
       SearchResult,
       ScientSpotForm,
+      Pagination,
     },
     setup() {
       const store = useStore();
+      store.dispatch("Lv2ScientSpot/init");
       //麵包屑路徑
       const breadcrumb = store.getters["Lv2ScientSpot/getBreadcrumb"];
       //渲染熱門主題區域
@@ -23,7 +26,6 @@
       console.log("form", form.city.citySelected);
       //search
       const search = store.getters["Lv2ScientSpot/getSearch"];
-      store.dispatch("Lv2ScientSpot/init");
       function HandFormClick() {
         store.dispatch("Lv2ScientSpot/apiForm");
       }
@@ -51,6 +53,7 @@
       :HandHotClassSearch="HandHotClassSearch"
     />
     <SearchResult :search="search" lv2Type="scientSpot" />
+    <Pagination Lv2Type="ScientSpot" />
   </div>
 </template>
 

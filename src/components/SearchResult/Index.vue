@@ -3,6 +3,7 @@
   import NoResult from "./NoResult.vue";
   import Result from "./Result.vue";
   import { computed } from "@vue/reactivity";
+  import { useStore } from "vuex";
   export default {
     components: {
       NoResult,
@@ -20,11 +21,21 @@
       },
     },
     setup(props) {
+      const store = useStore();
       //取得資料數量
       const totalResult = computed(() => {
         return props.search.searchResult.length;
       });
-      return { props, totalResult };
+      const currentPageData = computed(() => {
+        if (props.lv2Type === "activity") {
+          return store.getters[`Lv2Activity/getResultByCurrentPage`];
+        } else if (props.lv2Type === "restaurant") {
+          return store.getters[`Lv2Restaurant/getResultByCurrentPage`];
+        } else if (props.lv2Type === "scientSpot") {
+          return store.getters[`Lv2ScientSpot/getResultByCurrentPage`];
+        }
+      });
+      return { props, totalResult, currentPageData };
     },
   };
 </script>
@@ -34,7 +45,7 @@
     <TitleBar :totalResult="totalResult" />
     <Result
       :isSearch="props.search.isSearch"
-      :searchResult="props.search.searchResult"
+      :searchResult="currentPageData"
       :lv2Type="props.lv2Type"
     />
     <NoResult
