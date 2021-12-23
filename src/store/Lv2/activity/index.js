@@ -4,7 +4,7 @@ import { useMapLv2Img } from "@/composition-api";
 export default {
   namespaced: true,
   state: {
-    breadcrumb: ["首頁", "探索景點"],
+    breadcrumb: ["首頁", "節慶活動"],
     hotClass: {
       title: "熱門主題",
       className: [
@@ -109,6 +109,7 @@ export default {
     },
     HandSetCurrentPage({ commit }, index) {
       commit("setCurrentPage", index);
+      console.log("力宏敢啦");
     },
   },
   mutations: {

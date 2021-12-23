@@ -25,6 +25,10 @@
         type: Object,
         default: () => ({}),
       },
+      HandLoadingOK: {
+        type: Function,
+        default: () => {},
+      },
     },
     setup(props) {
       const store = useStore();
@@ -58,8 +62,8 @@
     <NoResult
       :isSearch="props.search.isSearch"
       :searchResult="props.search.searchResult"
+      :HandLoadingOK="props.HandLoadingOK"
     />
-    <!-- {{ props.loading.imgOk }} -->
     <Loading :imgOk="props.loading.imgOk" />
   </div>
 </template>

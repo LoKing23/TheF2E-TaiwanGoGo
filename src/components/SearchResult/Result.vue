@@ -54,33 +54,51 @@
       watch(
         () => apiResult.value,
         (newVal) => {
+          console.log(newVal);
           const total = newVal.length;
           let num = 0;
+          let timeUp = false;
+          setTimeout(() => {
+            props.loading.imgOk = true;
+            console.log("提早跳出");
+            timeUp = true;
+          }, 5000);
           newVal.forEach((item) => {
             const image = new Image();
             image.src = item.imgUrl;
             image.onload = () => {
               num++;
-              if (num === total) {
+              console.log("img success");
+              if (num === total && !timeUp) {
                 setTimeout(() => {
                   props.loading.imgOk = true;
-                }, 1000);
+                }, 800);
+              }
+            };
+            image.onerror = () => {
+              num++;
+              console.log("img error");
+
+              if (num === total) {
+                props.loading.imgOk = true;
               }
             };
           });
         },
       );
-      return { showResult, apiResult, notFoundImg };
+      const HandErrorImg = (img) => {
+        img.target.src = notFoundImg.value;
+      };
+      return { showResult, apiResult, notFoundImg, HandErrorImg };
     },
   };
 </script>
 <template>
   <div v-if="showResult" class="result-container">
-    <!-- {{ apiResult }} -->
     <div class="cards">
       <div v-for="item in apiResult" :key="item.name" class="card">
         <router-link class="card-imgWrap" :to="item.routerLink">
-          <img :src="item.imgUrl" />
+          <img :src="item.imgUrl" @error="HandErrorImg($event)" />
         </router-link>
         <div class="card-text">
           <h3>{{ item.name }}</h3>

@@ -18,9 +18,16 @@
       const search = store.getters[`Lv2${props.Lv2Type}/getSearch`];
       const page = store.getters[`Lv2${props.Lv2Type}/getPagination`];
       let pageArr = ref([]);
+      const emptyData = ref(true);
       watch(
         () => store.getters[`Lv2${props.Lv2Type}/getPaginationTotalPage`],
         (newVal) => {
+          if (newVal.length == 0) {
+            emptyData.value = true;
+            return;
+          } else {
+            emptyData.value = false;
+          }
           pageArr.value = [];
           for (let i = 0; i < newVal; i++) {
             pageArr.value.push(i + 1);
@@ -56,12 +63,12 @@
         props.HandResetLoading();
         store.dispatch(`Lv2${props.Lv2Type}/HandSetCurrentPage`, setValue);
       };
-      return { pageArr, HandPagination, search, page };
+      return { pageArr, HandPagination, search, page, emptyData };
     },
   };
 </script>
 <template>
-  <div v-if="search.isSearch" class="Pagination-container">
+  <div v-if="search.isSearch && !emptyData" class="Pagination-container">
     <ul @click="HandPagination($event)" class="pagination">
       <li
         :class="[

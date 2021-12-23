@@ -103,6 +103,9 @@ export default {
         commit("setTotalPage");
       });
     },
+    HandSetCurrentPage({ commit }, index) {
+      commit("setCurrentPage", index);
+    },
   },
   mutations: {
     //將傳入的圖片路徑與className作binding

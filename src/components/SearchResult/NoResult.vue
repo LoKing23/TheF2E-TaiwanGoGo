@@ -11,8 +11,13 @@
         type: Boolean,
         default: false,
       },
+      HandLoadingOK: {
+        type: Function,
+        default: () => {},
+      },
     },
     setup(props) {
+      props.HandLoadingOK();
       const showNoResult = computed(() => {
         if (props.isSearch && props.searchResult.length === 0) return true;
       });

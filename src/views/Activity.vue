@@ -40,6 +40,10 @@
       const HandResetLoading = () => {
         loading.value.imgOk = false;
       };
+      const HandLoadingOK = () => {
+        console.log("HandLoadingOK");
+        loading.value.imgOk = true;
+      };
       return {
         breadcrumb,
         hotClassData,
@@ -50,6 +54,7 @@
         hotClassData,
         HandResetLoading,
         loading,
+        HandLoadingOK,
       };
     },
   };
@@ -68,7 +73,12 @@
       :isSearch="search.isSearch"
       :HandHotClassSearch="HandHotClassSearch"
     />
-    <SearchResult :search="search" lv2Type="activity" :loading="loading" />
+    <SearchResult
+      :search="search"
+      lv2Type="activity"
+      :loading="loading"
+      :HandLoadingOK="HandLoadingOK"
+    />
     <Pagination Lv2Type="Activity" :HandResetLoading="HandResetLoading" />
   </div>
 </template>

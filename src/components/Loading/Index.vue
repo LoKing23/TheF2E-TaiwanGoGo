@@ -12,7 +12,6 @@
   };
 </script>
 <template>
-  {{ props.imgOk }}
   <div v-if="!props.imgOk" class="loading-container">
     <div class="loading-gif">
       <img src="@/assets/loading.gif" alt="" />
