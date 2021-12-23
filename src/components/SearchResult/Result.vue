@@ -1,5 +1,6 @@
 <script>
   import { computed, ref } from "@vue/reactivity";
+  import { watch } from "@vue/runtime-core";
   export default {
     props: {
       searchResult: {
@@ -14,16 +15,22 @@
         type: String,
         default: "",
       },
+      loading: {
+        type: Object,
+        default: () => ({
+          imgOk: false,
+        }),
+      },
     },
     setup(props) {
+      let notFoundImg = ref(null);
       import("@/assets/NoImage-img/NoImage-255x200.png").then((res) => {
         notFoundImg.value = res.default;
       });
       const showResult = computed(
-        () => props.isSearch && props.searchResult.length,
+        () =>
+          props.isSearch && props.searchResult.length && props.loading.imgOk,
       );
-      let notFoundImg = ref(null);
-
       const apiResult = computed(() => {
         return props.searchResult.map((item) => {
           let name = item.Name;
@@ -44,6 +51,25 @@
           };
         });
       });
+      watch(
+        () => apiResult.value,
+        (newVal) => {
+          const total = newVal.length;
+          let num = 0;
+          newVal.forEach((item) => {
+            const image = new Image();
+            image.src = item.imgUrl;
+            image.onload = () => {
+              num++;
+              if (num === total) {
+                setTimeout(() => {
+                  props.loading.imgOk = true;
+                }, 1000);
+              }
+            };
+          });
+        },
+      );
       return { showResult, apiResult, notFoundImg };
     },
   };

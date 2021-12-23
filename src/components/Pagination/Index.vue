@@ -1,11 +1,15 @@
 <script>
-  import { computed, ref, watch } from "vue";
+  import { ref, watch } from "vue";
   import { useStore } from "vuex";
   export default {
     props: {
       Lv2Type: {
         type: String,
         default: "",
+      },
+      HandResetLoading: {
+        type: Function,
+        default: () => {},
       },
     },
     setup(props) {
@@ -33,6 +37,7 @@
           store.getters[`Lv2${props.Lv2Type}/getPaginationCurrentPage`];
         // 改變後的值
         let setValue = null;
+        if (current == value) return;
         if (value === "prev") {
           if (current <= 1) {
             return;
@@ -48,6 +53,7 @@
         } else {
           setValue = value;
         }
+        props.HandResetLoading();
         store.dispatch(`Lv2${props.Lv2Type}/HandSetCurrentPage`, setValue);
       };
       return { pageArr, HandPagination, search, page };

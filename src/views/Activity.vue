@@ -5,7 +5,7 @@
   import SearchResult from "@/components/SearchResult/Index.vue";
   import Pagination from "@/components/Pagination/Index.vue";
   import { useStore } from "vuex";
-
+  import { ref } from "vue";
   export default {
     components: {
       ActivityForm,
@@ -27,11 +27,18 @@
       console.log("form", form.city.citySelected);
       //search
       const search = store.getters["Lv2Activity/getSearch"];
+      //loading 控制
+      const loading = ref({
+        imgOk: false,
+      });
       function HandFormClick() {
         store.dispatch("Lv2Activity/apiForm");
       }
       const HandHotClassSearch = (className) => {
         store.dispatch("Lv2Activity/apiHotClass", className);
+      };
+      const HandResetLoading = () => {
+        loading.value.imgOk = false;
       };
       return {
         breadcrumb,
@@ -41,6 +48,8 @@
         HandFormClick,
         HandHotClassSearch,
         hotClassData,
+        HandResetLoading,
+        loading,
       };
     },
   };
@@ -59,8 +68,8 @@
       :isSearch="search.isSearch"
       :HandHotClassSearch="HandHotClassSearch"
     />
-    <SearchResult :search="search" lv2Type="activity" />
-    <Pagination Lv2Type="Activity" />
+    <SearchResult :search="search" lv2Type="activity" :loading="loading" />
+    <Pagination Lv2Type="Activity" :HandResetLoading="HandResetLoading" />
   </div>
 </template>
 

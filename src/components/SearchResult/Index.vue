@@ -2,13 +2,15 @@
   import TitleBar from "./TitleBar.vue";
   import NoResult from "./NoResult.vue";
   import Result from "./Result.vue";
-  import { computed } from "@vue/reactivity";
+  import { computed, ref } from "vue";
   import { useStore } from "vuex";
+  import Loading from "@/components/Loading/Index.vue";
   export default {
     components: {
       NoResult,
       Result,
       TitleBar,
+      Loading,
     },
     props: {
       search: {
@@ -18,6 +20,10 @@
       lv2Type: {
         type: String,
         default: "",
+      },
+      loading: {
+        type: Object,
+        default: () => ({}),
       },
     },
     setup(props) {
@@ -47,12 +53,19 @@
       :isSearch="props.search.isSearch"
       :searchResult="currentPageData"
       :lv2Type="props.lv2Type"
+      :loading="props.loading"
     />
     <NoResult
       :isSearch="props.search.isSearch"
       :searchResult="props.search.searchResult"
     />
+    <!-- {{ props.loading.imgOk }} -->
+    <Loading :imgOk="props.loading.imgOk" />
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .searchResult-container {
+    position: relative;
+  }
+</style>

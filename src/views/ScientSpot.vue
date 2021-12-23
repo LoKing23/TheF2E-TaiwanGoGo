@@ -5,6 +5,7 @@
   import Lv2HotClass from "@/components/Lv2HotClass/Index.vue";
   import SearchResult from "@/components/SearchResult/Index.vue";
   import Pagination from "@/components/Pagination/Index.vue";
+  import { ref } from "vue";
   export default {
     components: {
       BreadCrumbs,
@@ -26,11 +27,17 @@
       console.log("form", form.city.citySelected);
       //search
       const search = store.getters["Lv2ScientSpot/getSearch"];
+      const loading = ref({
+        imgOk: false,
+      });
       function HandFormClick() {
         store.dispatch("Lv2ScientSpot/apiForm");
       }
       const HandHotClassSearch = (className) => {
         store.dispatch("Lv2ScientSpot/apiHotClass", className);
+      };
+      const HandResetLoading = () => {
+        loading.value.imgOk = false;
       };
       return {
         breadcrumb,
@@ -39,6 +46,8 @@
         search,
         HandFormClick,
         HandHotClassSearch,
+        HandResetLoading,
+        loading,
       };
     },
   };
@@ -52,8 +61,8 @@
       :isSearch="search.isSearch"
       :HandHotClassSearch="HandHotClassSearch"
     />
-    <SearchResult :search="search" lv2Type="scientSpot" />
-    <Pagination Lv2Type="ScientSpot" />
+    <SearchResult :search="search" lv2Type="scientSpot" :loading="loading" />
+    <Pagination Lv2Type="ScientSpot" :HandResetLoading="HandResetLoading" />
   </div>
 </template>
 

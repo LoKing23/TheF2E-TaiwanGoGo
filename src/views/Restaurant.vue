@@ -4,6 +4,7 @@
   import Lv2HotClass from "@/components/Lv2HotClass/Index.vue";
   import SearchResult from "@/components/SearchResult/Index.vue";
   import { useStore } from "vuex";
+  import { ref } from "vue";
   import Pagination from "@/components/Pagination/Index.vue";
 
   export default {
@@ -26,12 +27,19 @@
       console.log("form", form.city.citySelected);
       //search
       const search = store.getters["Lv2Restaurant/getSearch"];
+      //loading 控制
+      const loading = ref({
+        imgOk: false,
+      });
       store.dispatch("Lv2Restaurant/init");
       function HandFormClick() {
         store.dispatch("Lv2Restaurant/apiForm");
       }
       const HandHotClassSearch = (className) => {
         store.dispatch("Lv2Restaurant/apiHotClass", className);
+      };
+      const HandResetLoading = () => {
+        loading.value.imgOk = false;
       };
       return {
         breadcrumb,
@@ -40,6 +48,8 @@
         search,
         HandFormClick,
         HandHotClassSearch,
+        HandResetLoading,
+        loading,
       };
     },
   };
@@ -53,8 +63,8 @@
       :isSearch="search.isSearch"
       :HandHotClassSearch="HandHotClassSearch"
     />
-    <SearchResult :search="search" lv2Type="restaurant" />
-    <Pagination Lv2Type="Restaurant" />
+    <SearchResult :search="search" lv2Type="restaurant" :loading="loading" />
+    <Pagination Lv2Type="Restaurant" :HandResetLoading="HandResetLoading" />
   </div>
 </template>
 
