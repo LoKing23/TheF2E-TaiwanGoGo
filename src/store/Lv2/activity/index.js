@@ -52,6 +52,7 @@ export default {
       //2 重置search狀態
       commit("setSearchState", false);
       commit("setSearchResult", []);
+      commit("setCurrentPage", 1);
     },
     //api取熱門景點
     apiHotClass({ commit, state }, hotClass) {
@@ -63,6 +64,7 @@ export default {
         commit("setSearchResult", res.data);
         commit("setSearchState", true);
         commit("setTotalPage");
+        commit("setCurrentPage", 1);
       });
     },
     // api根據form打
@@ -97,6 +99,7 @@ export default {
       commit("setSearchResult", result.data);
       commit("setSearchState", true);
       commit("setTotalPage");
+      commit("setCurrentPage", 1);
     },
     // api依參數條件
     apiRequest({ commit, getters }, filter) {
@@ -105,6 +108,7 @@ export default {
         commit("setSearchResult", res.data);
         commit("setSearchState", true);
         commit("setTotalPage");
+        commit("setCurrentPage", 1);
       });
     },
     HandSetCurrentPage({ commit }, index) {
