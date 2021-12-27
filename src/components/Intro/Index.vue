@@ -24,6 +24,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     > * {
       margin-bottom: 35px;
     }
@@ -31,6 +32,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-end;
+      padding: 80px 15px;
     }
   }
 </style>

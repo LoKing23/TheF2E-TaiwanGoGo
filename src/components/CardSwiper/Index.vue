@@ -99,6 +99,10 @@
       left: 0;
       width: 100%;
       height: 100%;
+      transition: 0.3s;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
   h3 {
