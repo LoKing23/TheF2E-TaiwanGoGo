@@ -1,5 +1,5 @@
 <script>
-  import { ref, watch } from "vue";
+  import { ref } from "vue";
   export default {
     props: {
       hotClass: {
@@ -68,17 +68,18 @@
       border-radius: 24px;
       overflow: hidden;
       position: relative;
+      &:hover img {
+        transform: scale(1.1);
+      }
       &::before {
         content: attr(data-class);
         color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        white-space: nowrap;
         position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
+        z-index: 200;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         @media (min-width: 1200px) {
           font-size: 24px;
         }
@@ -87,6 +88,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: all 0.4s;
       }
     }
   }

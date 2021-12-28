@@ -32,8 +32,14 @@
           props.isSearch && props.searchResult.length && props.loading.imgOk,
       );
       const apiResult = computed(() => {
+        console.log(props.searchResult);
         return props.searchResult.map((item) => {
-          let name = item.Name;
+          console.log("item.name", item.ActivityName);
+          let name = item.ActivityName
+            ? item.ActivityName
+            : item.ScenicSpotName
+            ? item.ScenicSpotName
+            : item.RestaurantName;
           let imgUrl = item.Picture.PictureUrl1
             ? item.Picture.PictureUrl1
             : notFoundImg.value;
@@ -51,6 +57,7 @@
           };
         });
       });
+      //計算 loading 時間
       watch(
         () => apiResult.value,
         (newVal) => {
