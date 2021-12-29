@@ -48,13 +48,10 @@
       const apiID = computed(() => {
         switch (lv2.value) {
           case "activity":
-            console.log(lv2);
             return "ActivityID";
           case "scientSpot":
-            console.log(lv2);
             return "ScenicSpotID";
           case "restaurant":
-            console.log(lv2);
             return "RestaurantID";
         }
       });
@@ -64,6 +61,25 @@
         } else {
           return apiData.Description;
         }
+      });
+      const apiName = computed(() => {
+        let apiLv2 = null;
+        switch (lv2.value) {
+          case "activity":
+            apiLv2 = "ActivityName";
+            console.log(apiLv2);
+            break;
+          case "scientSpot":
+            apiLv2 = "ScenicSpotName";
+            console.log(apiLv2);
+            break;
+          case "restaurant":
+            apiLv2 = "RestaurantName";
+            console.log(apiLv2);
+            break;
+        }
+        console.log(apiData.value[apiLv2]);
+        return apiData.value[apiLv2];
       });
       //main API
       let api = null;
@@ -131,6 +147,7 @@
         cardSwiper,
         lv2,
         content,
+        apiName,
       };
     },
   };
@@ -143,7 +160,7 @@
       :swiperData="swiper.swiperData"
       :haveData="swiper.haveData"
     />
-    <Headline :title="apiData.Name" />
+    <Headline :title="apiName" />
     <HashTag />
     <Content
       :title="subTitle"
