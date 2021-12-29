@@ -22,6 +22,7 @@
             )} ${item.EndTime.substr(0, 10).replace("-", "/")}`,
         );
       });
+
       return {
         props,
         newTime,
@@ -57,7 +58,7 @@
               </svg>
               <span>{{ item.City }}</span>
             </div>
-            <router-link class="readMore" :to="`/activity/${item.ID}`">
+            <router-link class="readMore" :to="`/activity/${item.ActivityID}`">
               <span>詳細介紹</span>
               <svg
                 width="16"

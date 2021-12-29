@@ -1,5 +1,5 @@
 <script>
-  import { onMounted, watch } from "@vue/runtime-core";
+  import { computed, onMounted, watch } from "@vue/runtime-core";
   import Swiper from "swiper";
   import "swiper/swiper-bundle.css";
   export default {
@@ -29,8 +29,35 @@
           },
         });
       });
+      const newData = computed(() => {
+        return props.data.map((item) => {
+          console.log("item", item);
+          let name = item.ActivityName
+            ? item.ActivityName
+            : item.ScenicSpotName
+            ? item.ScenicSpotName
+            : item.RestaurantName;
+          let imgUrl = item.Picture.PictureUrl1
+            ? item.Picture.PictureUrl1
+            : notFoundImg.value;
+          let location = item.City
+            ? item.City
+            : item.Location
+            ? item.Location
+            : item.Address;
+          let ID = item.ScenicSpotID ? item.ScenicSpotID : item.RestaurantID;
+          let routerLink = `/${props.Lv2Type}/${ID}`;
+          return {
+            name,
+            imgUrl,
+            location,
+            routerLink,
+          };
+        });
+      });
       return {
         props,
+        newData,
       };
     },
   };
@@ -39,12 +66,12 @@
   <div class="container">
     <div :class="['swiper', props.swiperName]">
       <div class="swiper-wrapper">
-        <div v-for="item in props.data" :key="item.Name" class="swiper-slide">
-          <router-link :to="`/${props.Lv2Type}/${item.ID}`" class="card">
+        <div v-for="item in newData" :key="item.name" class="swiper-slide">
+          <router-link :to="item.routerLink" class="card">
             <div class="imgWrap">
-              <img :src="item.Picture.PictureUrl1" />
+              <img :src="item.imgUrl" />
             </div>
-            <h3>{{ item.Name }}</h3>
+            <h3>{{ item.name }}</h3>
             <div class="location">
               <svg
                 width="15"
@@ -58,7 +85,7 @@
                   fill="#E0DA48"
                 />
               </svg>
-              <span>{{ item.City }}</span>
+              <span>{{ item.location }}</span>
             </div>
           </router-link>
         </div>
