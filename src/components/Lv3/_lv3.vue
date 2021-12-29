@@ -45,6 +45,19 @@
       const cardSwiper = reactive({});
       const lv2 = ref(route.params.lv2);
       const lv3 = route.params.lv3;
+      const apiID = computed(() => {
+        switch (lv2.value) {
+          case "activity":
+            console.log(lv2);
+            return "ActivityID";
+          case "scientSpot":
+            console.log(lv2);
+            return "ScenicSpotID";
+          case "restaurant":
+            console.log(lv2);
+            return "RestaurantID";
+        }
+      });
       const content = computed(() => {
         if (apiData.DescriptionDetail) {
           return apiData.DescriptionDetail;
@@ -86,12 +99,13 @@
       }
       async function init() {
         //main content api
-        const result = await api(`$filter= contains(ID, '${lv3}')`);
+        const result = await api(`$filter= contains(${apiID.value}, '${lv3}')`);
         apiData.value = result.data[0];
         console.log(apiData);
         //cardSwiper api
         cardSwiper.data = await useGetApiByTimes(apiCardSwiper);
-        breadcrumb;
+
+        // breadcrumb;
         if (apiData.value.City) breadcrumb.push(apiData.value.City);
         breadcrumb.push(apiData.value.Name);
 
