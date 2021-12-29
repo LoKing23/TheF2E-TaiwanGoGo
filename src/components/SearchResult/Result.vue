@@ -31,6 +31,16 @@
         () =>
           props.isSearch && props.searchResult.length && props.loading.imgOk,
       );
+      const apiID = computed(() => {
+        switch (props.lv2Type) {
+          case "activity":
+            return "ActivityID";
+          case "scientSpot":
+            return "ScenicSpotID";
+          case "restaurant":
+            return "RestaurantID";
+        }
+      });
       const apiResult = computed(() => {
         console.log(props.searchResult);
         return props.searchResult.map((item) => {
@@ -48,7 +58,8 @@
             : item.Location
             ? item.Location
             : item.Address;
-          let routerLink = `/${props.lv2Type}/${item.ID}`;
+          let routerLink = `/${props.lv2Type}/${item[apiID.value]}`;
+          console.log("apiID", apiID.value);
           return {
             name,
             imgUrl,
