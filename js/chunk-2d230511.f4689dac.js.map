@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/assets/LV2-img/Restaurant/bg2.png"],"names":["module","exports"],"mappings":"mGAAAA,EAAOC,QAAU,IAA0B","file":"js/chunk-2d230511.f4689dac.js","sourcesContent":["module.exports = __webpack_public_path__ + \"img/bg2.eeedcca0.png\";"],"sourceRoot":""}
