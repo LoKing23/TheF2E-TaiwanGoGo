@@ -52,7 +52,7 @@
         >
           <router-link
             :data-city="item.City"
-            :data-area="item.Name"
+            :data-area="item.ScenicSpotName"
             :to="`/scientSpot/${item.ID}`"
           >
             <img :src="item.Picture.PictureUrl1" />

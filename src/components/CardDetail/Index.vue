@@ -197,7 +197,7 @@
     .readMore {
       color: #7f977b;
       display: none;
-
+      cursor: pointer;
       @media (min-width: 1200px) {
         display: flex;
         align-items: center;
